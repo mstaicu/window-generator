@@ -1,0 +1,39 @@
+<div class="window__content" ng-class="{'flipped': isFlipped}">
+	<div class="window__front">
+		<div class="window__flip">
+			<button class="action__button" ng-click="flipWindow()">
+				Flip window
+			</button>
+		</div>
+		<div class="window__progress">
+			<div class="percentage__progress" ng-style="{'height': progressHeight, 'background-color': progressColor}"></div>
+		</div>
+	</div>
+	<div class="window__back">
+		<div class="window__flip">
+			<button class="action__button" ng-click="flipWindow()">
+				Flip window
+			</button>
+
+			<button class="action__button" ng-click="removeWindow()">
+				Delete window
+			</button>
+		</div>
+		<div class="back__container">
+			<div class="input__container">
+				<p class="label__name">Window name</p>
+				<input type="text" ng-model="window.name" placeholder="Enter the name of the window">
+			</div>
+
+			<div class="input__container">
+				<p class="label__name">Start date</p>
+				<input type="date" ng-model="startDate">
+			</div>
+
+			<div class="input__container">
+				<p class="label__name">End date</p>
+				<input type="date" ng-model="endDate">
+			</div>
+		</div>
+	</div>
+</div>

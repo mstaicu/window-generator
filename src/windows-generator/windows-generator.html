@@ -1,0 +1,13 @@
+<div class="window__buttons">
+	<button class="window__button" ng-click="addNewWindow()">
+		Add window
+	</button>
+	<button class="window__button" ng-click="getData()">
+		Get data
+	</button>
+</div>
+
+<div class="window__container">
+	<window ng-repeat="window in retrievedWindows" window="window">
+	</window>
+</div>

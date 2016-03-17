@@ -1,0 +1,22 @@
+{
+  "name": "window-generator",
+  "description": "window generator",
+  "main": "./build/app-bundle.js",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#~1.5.0",
+    "normalize-css": "normalize.css#~3.0.3",
+    "angular-mocks": "~1.5.0",
+    "angular-resource": "~1.5.0"
+  }
+}
