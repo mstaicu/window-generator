@@ -32,7 +32,7 @@ angular.module('window').directive('window', function() {
       /**
        * [getPeriodPercentage Gets a percentage based representation of a given period range]
        *
-			 The years are extracted from the dates that are passed as arguments
+       The years are extracted from the dates that are passed as arguments
        and are set as outer margins for the computed range
 
        The dates represent the inner range, inside the year range
