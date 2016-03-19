@@ -41,9 +41,7 @@ window {
       position: absolute;
       bottom: 0;
       width: 100%;
-      /**
-			 * 23px represents the height of the flip button
-			 */
+
       height: calc(100% - 23px);
       .percentage__progress {
         position: absolute;
