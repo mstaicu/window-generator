@@ -30,15 +30,15 @@ angular.module('window').directive('window', function() {
       }
 
       /**
-       * [getPeriodPercentage Gets a percentage based representation of a given period range
-       * 											The years are extracted from the dates that are passed as arguments
-       * 											and are set as outer margins for the computed range
+       * [getPeriodPercentage Gets a percentage based representation of a given period range]
        *
-       * 											The dates represent the inner range, inside the year range
-       * 											and are used to compute the percentage based value of the
-       * 											elapsed period between the outer margins represented by the
-       * 											two years
-       * ]
+			 The years are extracted from the dates that are passed as arguments
+       and are set as outer margins for the computed range
+
+       The dates represent the inner range, inside the year range
+       and are used to compute the percentage based value of the
+       elapsed period between the outer margins represented by the two years
+       *
        * @param  {[Date|Timestamp]} startDate [The start period]
        * @param  {[Date|Timestamp]} endDate   [The end period]
        * @return {[Number]}           				[Percent value of the elapsed time]
@@ -52,6 +52,23 @@ angular.module('window').directive('window', function() {
           endPeriod = (new Date(endDate).getTime());
 
         return ((endPeriod - startPeriod) * 100) / (endOfRange - beginningOfRange);
+      }
+
+      function getPeriodPercentageForDates(startDate, endDate) {
+        var _startDate = new Date(startDate),
+          _endDate = new Date(endDate);
+
+        return (_startDate && _endDate) ? Math.round(getPeriodPercentage(_startDate, _endDate)) : 0;
+      }
+
+      function updateVisualProgression() {
+        var periodPercentageForDates = getPeriodPercentageForDates($scope.startDate, $scope.endDate);
+
+        angular.extend($scope, {
+          elapsedPeriodPercentage: periodPercentageForDates,
+          progressColor: `hsl(${(periodPercentageForDates + 10)}, 80%, 50%)`,
+          progressHeight: `${periodPercentageForDates}%`
+        });
       }
 
       $scope.$watch('window', function(updatedWindow) {
@@ -78,41 +95,23 @@ angular.module('window').directive('window', function() {
 
       $scope.$watch('startDate', function(newDate) {
         if (newDate) {
+          updateVisualProgression();
+
           /**
-           * Recompute the progress based on the new date values
+           * Save the timestamp in the window object
            */
-          var windowStartDate = new Date($scope.startDate),
-            windowEndDate = new Date($scope.endDate);
-
-          if (windowStartDate && windowEndDate) {
-            var elapsedPeriodPercentage = Math.round(getPeriodPercentage(windowStartDate, windowEndDate));
-
-            angular.extend($scope, {
-              elapsedPeriodPercentage: elapsedPeriodPercentage,
-              progressColor: `hsl(${(elapsedPeriodPercentage + 10)}, 80%, 50%)`,
-              progressHeight: `${elapsedPeriodPercentage}%`
-            });
-          }
+          $scope.window.startDate = (new Date(newDate)).getTime();
         }
       });
 
       $scope.$watch('endDate', function(newDate) {
         if (newDate) {
+          updateVisualProgression();
+
           /**
-           * Recompute the progress based on the new date values
+           * Save the timestamp in the window object
            */
-          var windowStartDate = new Date($scope.startDate),
-            windowEndDate = new Date($scope.endDate);
-
-          if (windowStartDate && windowEndDate) {
-            var elapsedPeriodPercentage = Math.round(getPeriodPercentage(windowStartDate, windowEndDate));
-
-            angular.extend($scope, {
-              elapsedPeriodPercentage: elapsedPeriodPercentage,
-              progressColor: `hsl(${(elapsedPeriodPercentage + 10)}, 80%, 50%)`,
-              progressHeight: `${elapsedPeriodPercentage}%`
-            });
-          }
+          $scope.window.endDate = (new Date(newDate)).getTime();
         }
       });
     }
